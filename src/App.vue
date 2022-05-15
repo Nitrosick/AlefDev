@@ -1,0 +1,25 @@
+<template>
+  <component :is="layout">
+    <router-view/>
+  </component>
+</template>
+
+<script>
+import MainLayout from "@/layouts/MainLayout"
+
+export default {
+  computed: {
+    layout () {
+      return (this.$route.meta.layout || 'main') + '-layout'
+    }
+  },
+  components: {
+    MainLayout
+  }
+}
+</script>
+
+<style lang="less">
+@import '~materialize-css/dist/css/materialize.min.css';
+@import 'assets/style.css';
+</style>
