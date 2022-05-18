@@ -5,7 +5,7 @@
             to="/"
             exact
         >
-            <img src="@/assets/images/logo.png" alt="logo" class="main_logo" width="100">
+            <img src="@/assets/images/logo.png" alt="logo" class="main_logo" width="75">
         </router-link>
 
         <div class="content">

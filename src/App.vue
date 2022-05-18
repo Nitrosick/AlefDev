@@ -20,6 +20,5 @@ export default {
 </script>
 
 <style lang="less">
-@import '~materialize-css/dist/css/materialize.min.css';
 @import 'assets/style.css';
 </style>

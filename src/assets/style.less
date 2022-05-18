@@ -1,3 +1,17 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Calibri', serif;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+a {
+    text-decoration: none;
+}
+
 .main {
     position: relative;
     width: 100vw;
@@ -7,9 +21,6 @@
     align-items: center;
     padding: 50px;
     background-color: #0b282a;
-    color: white;
-    font-weight: bold;
-    font-size: 18px;
 
     &_logo {
         position: absolute;
@@ -30,6 +41,7 @@
         justify-content: space-between;
         padding: 25px;
         margin-bottom: 15px;
+        color: white;
         background-color: #4f5d5f;
         border-radius: 15px;
 
@@ -59,6 +71,100 @@
                 filter: brightness(1.3);
                 transition: ease-in-out 0.5s;
             }
+        }
+    }
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    padding: 50px;
+    border: 1px solid #4f5d5f;
+    border-radius: 15px;
+
+    &_name {
+        display: block;
+        padding: 15px 25px;
+        background-color: #4f5d5f;
+        border-radius: 15px;
+        min-width: 300px;
+    }
+
+    &_roles {
+        padding: 15px 25px 5px 25px;
+        background-color: #4f5d5f;
+        border-radius: 15px;
+
+        &_title {
+            display: block;
+            margin-bottom: 15px;
+        }
+
+        &_item {
+            display: flex;
+            justify-content: space-between;
+            border-top: 2px solid #0b282a;
+            padding: 10px 0;
+
+            span {
+                font-weight: normal;
+                font-size: 17px;
+            }
+        }
+
+        &_delete {
+            background-color: transparent;
+            color: white;
+            font-weight: bold;
+            border: none;
+            font-size: 17px;
+            cursor: pointer;
+            transform-origin: 100% 0;
+            transform: scale(1.3, 1);
+
+            &:hover {
+                color: #0b282a;
+                transition: 0.3s;
+            }
+
+            &:focus,
+            &:active {
+                background-color: transparent;
+            }
+        }
+    }
+
+    &_add_role {
+        display: flex;
+        padding: 15px 25px;
+        background-color: #4f5d5f;
+        border-radius: 15px;
+
+        #role {
+            width: 100%;
+            background-color: transparent;
+            border: none;
+            font-weight: normal;
+            font-size: 17px;
+
+            option {
+                background-color: #4f5d5f;
+                font-weight: normal;
+                font-size: 17px;
+            }
+
+            &:focus,
+            &:active {
+                outline: none;
+            }
+        }
+
+        #add_role {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            margin-left: 15px;
         }
     }
 }

@@ -1,16 +1,25 @@
 <template>
     <div class="users">
-        <div v-for="user in users" :key="user.id" class="users_item">
+        <router-link
+            v-for="user in users"
+            :key="user.id"
+            tag="a"
+            :to="{ name: 'profile', params: {id: user.id} }"
+            class="users_item"
+        >
             <span class="users_item_id">ID: {{ user.id }}</span>
             <div class="users_item_splitter"></div>
             <span class="users_item_name">Name: {{ user.name }}</span>
-        </div>
+        </router-link>
 
         <nav class="users_pagination">
             <router-link
-                to="/"
+                v-for="n in pagesCount"
+                :key="n"
+                :to="'/'"
                 class="users_pagination_link"
-            >1</router-link>
+                @click.prevent="getUsers(n-1)"
+            >{{ n }}</router-link>
         </nav>
     </div>
 </template>
@@ -22,46 +31,39 @@ export default {
     data() {
         return {
             users: [],
-            count: 5
+            itemsCount: 5,
+            pagesCount: 1
         }
     },
-    computed: {
+    methods: {
+        getUrl(page) {
+            return `https://test-js.alef.dev/users?page=${page}&count=${this.itemsCount}`
+        },
+
+        async getUsers(page = 0) {
+            try {
+                const response = await fetch(this.getUrl(page))
+                const result = await response.json()
+
+                this.users = []
+                this.users.push(...result.data)
+            } catch (error) {
+                console.log('Request error!')
+            }
+        },
+
         async getPagesCount() {
             try {
                 const response = await fetch('https://test-js.alef.dev/users?count=1000')
                 const result = await response.json()
-                return result.data.length / this.count
+                this.pagesCount = result.data.length / this.itemsCount
             } catch (error) {
-                console.log('Request error!');
-                return 0
-            }
-        }
-    },
-    methods: {
-        getUrl() {
-            let page = 0
-
-            if (this.$route.query.page) {
-                page = this.$route.query.page
-            }
-            if (this.$route.query.count) {
-                this.count = this.$route.query.count
-            }
-
-            return `https://test-js.alef.dev/users?page=${page}&count=${this.count}`;
-        },
-
-        async getUsers() {
-            try {
-                const response = await fetch(this.getUrl())
-                const result = await response.json()
-                this.users.push(...result.data)
-            } catch (error) {
-                console.log('Request error!');
+                console.log('Request error!')
             }
         }
     },
     mounted() {
+        this.getPagesCount()
         this.getUsers()
     }
 }
